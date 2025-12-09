@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Gate Pass System | Single Page App</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>🛡️ Hostel Gate Pass System</h1>
+            <div class="user-info">
+                <span id="welcome-message">Welcome! Please Log In.</span>
+                <button class="logout-btn" id="logout-btn" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        
+        <section id="login-view" class="view active-view">
+            <h2>🔐 System Login</h2>
+            <form id="login-form" class="responsive-form" style="max-width: 400px; margin: 20px auto;">
+                <fieldset class="form-section full-width">
+                    <legend>User Credentials</legend>
+                    <div class="input-group">
+                        <label for="login-username">Username (ID)</label>
+                        <input type="text" id="login-username" placeholder="e.g., S1001, T999, T888" required> 
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" value="password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-role">Login As:</label>
+                        <select id="login-role" required>
+                            <option value="student">Student</option>
+                            <option value="coordinator">Class Coordinator</option>
+                            <option value="rector">Rector</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <button type="submit" class="submit-btn full-width">Log In</button>
+                <div id="login-message" class="message-box full-width"></div>
+            </form>
+        </section>
+
+
+        <section id="student-view" class="view">
+            <nav class="sidebar">
+                <ul>
+                    <li class="nav-item student-nav active" data-view="apply">Apply for Leave</li>
+                    <li class="nav-item student-nav" data-view="history">Leave History</li>
+                    <li class="nav-item student-nav" data-view="gatepass">View Gate Pass</li>
+                </ul>
+            </nav>
+
+            <div class="content-area" id="student-content-area">
+                
+                <div id="apply" class="sub-view active-view">
+                    <h2>📝 New Leave Application</h2>
+                    <form id="leave-form" class="responsive-form">
+                        <fieldset class="form-section">
+                            <legend>Travel Details</legend>
+                            <div class="input-group">
+                                <label for="departure-date">Departure Date & Time</label>
+                                <input type="date" id="departure-date" name="departure-date" required>
+                                <input type="time" id="departure-time" name="departure-time" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="arrival-date">Expected Arrival Date</label>
+                                <input type="date" id="arrival-date" name="arrival-date" required>
+                            </div>
+                            <div class="input-group full-width">
+                                <label for="nature-of-leave">Nature of Leave</label>
+                                <select id="nature-of-leave" name="nature-of-leave" required>
+                                    <option value="">-- Select Purpose --</option>
+                                    <option value="non-working">Personal/Urgent (Non-Working)</option>
+                                    <option value="working">Internship/Project/Exam (Working)</option>
+                                </select>
+                                <small class="hint-text">Working nature requires two approvals (Coordinator & Rector).</small>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-section">
+                            <legend>Destination & Purpose</legend>
+                            <div class="input-group full-width">
+                                <label for="destination">Place of Destination</label>
+                                <input type="text" id="destination" name="destination" placeholder="City, State / Company Name" required>
+                            </div>
+                            <div class="input-group full-width">
+                                <label for="reason">Detailed Reason for Leave</label>
+                                <textarea id="reason" name="reason" rows="4" required></textarea>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-section full-width">
+                            <legend>Guardian Consent</legend>
+                            <div class="input-group">
+                                <label for="guardian-name">Guardian Name</label>
+                                <input type="text" id="guardian-name" name="guardian-name" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="guardian-contact">Contact No.</label>
+                                <input type="tel" id="guardian-contact" name="guardian-contact" pattern="[0-9]{10}" title="10 digit phone number" required>
+                            </div>
+                        </fieldset>
+                        
+                        <button type="submit" class="submit-btn full-width">🚀 Submit Application</button>
+                        <div id="status-message" class="message-box full-width"></div>
+                    </form>
+                </div>
+                
+                <div id="history" class="sub-view">
+                    <h2>📜 Leave History & Status</h2>
+                    <div id="leave-table-container">
+                        </div>
+                </div>
+
+                 <div id="gatepass" class="sub-view">
+                    <h2>✅ Approved Gate Pass</h2>
+                    <div id="gatepass-card" class="gatepass-card">
+                        <p>Enter a Reference No. below to quickly retrieve your approved gate pass:</p>
+                        <div class="input-group gatepass-lookup">
+                            <input type="text" id="lookup-ref-no" placeholder="Enter Reference Number (e.g., HLM-1A2B-C3D4)">
+                            <button id="lookup-btn">Lookup</button>
+                        </div>
+                        <div id="gatepass-details" class="message-box warning">No approved pass selected or found.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="staff-view" class="view">
+             <nav class="sidebar">
+                <ul>
+                    <li class="nav-item staff-nav active" data-view="pending">Pending Approvals</li>
+                    <li class="nav-item staff-nav" data-view="approved">Approval History</li>
+                </ul>
+            </nav>
+
+            <div class="content-area" id="staff-content-area">
+                <div id="pending" class="sub-view active-view">
+                    <h2 id="pending-title">Pending Approvals</h2>
+                    <div id="pending-leaves-table-container">
+                        <div id="pending-leaves-body">Loading...</div>
+                    </div>
+                </div>
+                
+                <div id="approved" class="sub-view">
+                    <h2>Approval/Rejection History</h2>
+                    <div class="history-table-container">Click "Approval History" to load.</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

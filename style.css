@@ -1,0 +1,320 @@
+/* --- 1. Basic Reset and Typography --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #eef1f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- 2. Header and Navigation --- */
+header {
+    background-color: #004c99; /* Deep Blue */
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.user-info span {
+    margin-right: 15px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.logout-btn {
+    background-color: #ff5722;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #e64a19;
+}
+
+/* --- 3. Main Dashboard Layout (CSS Grid) --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr; /* Sidebar and Content */
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.sidebar {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.nav-item {
+    padding: 12px 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: #f0f0f0;
+}
+
+.nav-item.active {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.content-area {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.view {
+    display: none;
+}
+
+.active-view {
+    display: block;
+}
+
+/* --- 4. Responsive Form Styling (CSS Flexbox) --- */
+.responsive-form {
+    display: flex;
+    flex-wrap: wrap; /* Allows sections to wrap on small screens */
+    gap: 20px;
+}
+
+.form-section {
+    flex: 1 1 100%; /* Takes full width by default */
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+/* For larger screens, make two sections appear side-by-side */
+@media (min-width: 768px) {
+    .form-section {
+        flex: 1 1 calc(50% - 10px); /* Two columns, accounting for gap */
+    }
+    .form-section:nth-child(3) {
+        /* Guardian section will still be 50% */
+        flex: 1 1 calc(50% - 10px); 
+    }
+    .full-width {
+        flex: 1 1 100%; /* Overrides 50% for full-width fields */
+    }
+}
+
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.1em;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+input:not([type="time"]):not([type="date"]), 
+select, 
+textarea,
+.gatepass-lookup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Grouping date and time fields */
+.input-group:has(#departure-date) {
+    display: flex;
+    gap: 10px;
+}
+.input-group:has(#departure-date) input {
+    width: 50%;
+}
+
+.hint-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;
+    color: #6c757d;
+}
+
+/* --- 5. Button and Message Styling --- */
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.message-box {
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+/* --- 6. History Table and Gate Pass Card Styling --- */
+
+/* Simple Status Table (Simulated) */
+#leave-table-container {
+    overflow-x: auto;
+}
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.status-table th, .status-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.status-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+.status-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.status-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+.status-tag.pending { background-color: #ffc107; color: #333; }
+.status-tag.approved { background-color: #28a745; color: white; }
+.status-tag.rejected { background-color: #dc3545; color: white; }
+
+/* Gate Pass Lookup */
+.gatepass-lookup {
+    display: flex;
+    gap: 10px;
+}
+.gatepass-lookup input {
+    flex-grow: 1;
+}
+#lookup-btn {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#gatepass-details {
+    margin-top: 20px;
+    padding: 30px;
+    text-align: left;
+    white-space: pre-wrap;
+    background-color: #e9ecef; /* Light gray background for the pass */
+    border: 2px dashed #007bff;
+}
+
+/* --- 7. Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .user-info {
+        margin-top: 10px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Stack sidebar and content */
+        margin: 10px;
+    }
+    .sidebar ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+    }
+    .nav-item {
+        flex: 1 1 0;
+        text-align: center;
+        margin: 0 5px;
+    }
+    .content-area {
+        padding: 20px;
+    }
+    /* Form fields stack on mobile */
+    .form-section {
+        flex: 1 1 100%;
+    }
+}
